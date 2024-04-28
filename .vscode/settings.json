@@ -1,0 +1,9 @@
+{
+    "isort.importStrategy": "useBundled",
+    "ruff.importStrategy": "useBundled",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    }
+}

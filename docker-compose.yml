@@ -1,0 +1,46 @@
+services:
+  www:
+    build:
+      context: www
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8000
+    expose:
+      - 8000
+    networks:
+      - waf
+
+  # https://github.com/coreruleset/modsecurity-crs-docker/blob/master/README.md
+  modsecurity:
+    image: owasp/modsecurity-crs:nginx-alpine
+    user: root:root
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      # - ./modsecurity.default.conf:/etc/nginx/templates/conf.d/default.conf.template:ro
+      - ./waf/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf:ro
+      - ./waf/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:ro
+
+    environment:
+      - PORT=8000
+      - BACKEND=http://www:8000
+      - ALLOWED_METHODS=GET HEAD POST PUT DELETE
+      - REAL_IP_HEADER=X-Forwarded-For
+      - ERRORLOG=/var/log/nginx/errors.log
+      - ACCESSLOG=/var/log/nginx/access.log
+      - MODSEC_AUDIT_STORAGE=/var/log/nginx/
+      - MODSEC_AUDIT_LOG=/var/log/nginx/modsecurity.log
+      - BLOCKING_PARANOIA=3
+      - EXECUTING_PARANOIA=3
+      - ANOMALY_INBOUND=10
+      - ANOMALY_OUTBOUND=2
+      - MODSEC_RULE_ENGINE=on
+      - MODSEC_REQ_BODY_ACCESS=on
+    ports:
+      - 8000:8000
+    networks:
+      - waf
+
+networks:
+  waf:
+    driver: bridge
