@@ -1,5 +1,7 @@
 # 📛 OWASP ModSecurity Core Rule Set Tuning Practice
 
+**⚠️ Warning**: The solutions for these exercises are intended only for educational purposes and might not be production-ready.
+
 [This collection](./test_waf.py) of basic unit tests is designed for practicing on how to adjust the [OWASP ModSecurity WAF Core Rule Set](https://owasp.org/www-project-modsecurity-core-rule-set/) to pass each test. It's important to note that these tests are not reflective of real-life situations and are solely intended for honing your skills in tuning WAF rules in different scenarios.
 
 ## Requirements
