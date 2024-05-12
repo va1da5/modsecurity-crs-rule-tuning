@@ -63,13 +63,14 @@ select = [
     "E9",
     "F",
 ]
+
 ignore = [
     # mutable defaults
     "B006",
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
+fixable = ["I"]
 
 unfixable = [
     # disable auto fix for print statements
@@ -108,9 +109,3 @@ docstring-code-format = false
 # This only has an effect when the `docstring-code-format` setting is
 # enabled.
 docstring-code-line-length = "dynamic"
-
-[tool.ruff.lint.isort]
-length-sort = true
-length-sort-straight = true
-combine-as-imports = true
-extra-standard-library = ["typing_extensions"]
