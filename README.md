@@ -57,6 +57,12 @@ pytest -k test_cookie_1
 8. Repeat steps 4 to 7 until test reports success.
 9. Move to the next unit test.
 
+## Solutions
+
+The solutions to the exercises can be found in the solutions branch. To access them, you can use the link below.
+
+- [Solution Branch](https://github.com/va1da5/modsecurity-crs-rule-tuning/tree/solution)
+
 ## References
 
 - [owasp-modsecurity/ModSecurity](https://github.com/owasp-modsecurity/ModSecurity)
